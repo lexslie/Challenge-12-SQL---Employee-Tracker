@@ -177,3 +177,13 @@ function addRole() {
         });
     });
 }
+
+// Function to view all departments
+function viewAllDepartments() {
+    let query = "SELECT * FROM department";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        init();
+    });
+}
