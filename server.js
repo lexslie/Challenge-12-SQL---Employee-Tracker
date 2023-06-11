@@ -137,3 +137,14 @@ function updateEmployeeRole() {
         });
     });
 }
+
+// Function to view all roles
+function viewAllRoles() {
+    let query = "SELECT * FROM role";
+    connection.query(query, 
+        function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            init()
+        });
+}
