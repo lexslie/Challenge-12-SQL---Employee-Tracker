@@ -113,3 +113,27 @@ function addEmployee() {
         });
     });
 }
+
+// Function to update employee roles
+function updateEmployeeRole() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "Which employee would you like to update?",
+            name: "eeUpdate"
+        },
+        {
+            type: "input",
+            message: "What would you like to update to?",
+            name: "updateRole"
+        }
+    ])
+    .then(function(answer) {
+        connection.query("UPDATE employee SET role_id=? WHERE first_name=?", [answer.updateRole, answer.eeUpdate], 
+        function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            init();
+        });
+    });
+}
