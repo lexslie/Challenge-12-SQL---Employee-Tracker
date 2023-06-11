@@ -148,3 +148,32 @@ function viewAllRoles() {
             init()
         });
 }
+
+// Function to add roles
+function addRole() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What role would you like to add?",
+            name: "roleName"
+        },
+        {
+            type: "input",
+            message: "What is the salary for this role?",
+            name: "salaryTotal"
+        },
+        {
+            type: "input",
+            message: "What is the department ID number",
+            name: "departmentID"
+        }
+    ])
+    .then(function(answer) {
+        connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleName, answer.salaryTotal, answer.departmentID],
+        function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            init();
+        });
+    });
+}
