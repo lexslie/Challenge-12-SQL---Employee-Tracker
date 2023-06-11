@@ -25,7 +25,7 @@ connection.connect(function (err) {
 function init() {
     inquirer.prompt({
         type: "list",
-        name: "option",
+        name: "task",
         message: "What would you like to do?",
         choices: [
             "View All Employees",
@@ -38,10 +38,10 @@ function init() {
             "Quit"
         ],
     })
-    .then(function(option) {
-        console.log("You chose to: " + result.option);
+    .then(function({ task }) {
+        console.log("You chose to: " + task);
 
-        switch (result.option) {
+        switch (task) {
             case "View All Employees":
                 viewAllEmployees();
                 break;
