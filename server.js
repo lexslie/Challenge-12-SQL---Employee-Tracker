@@ -1,8 +1,8 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const {createConnection} = require("mysql2");
-// require("console.table");
-const cTable = require("console.table");
+require("console.table");
+// const cTable = require("console.table");
 
 // Connecting mysql
 const connection = mysql.createConnection({
@@ -25,7 +25,7 @@ connection.connect(function (err) {
 function init() {
     inquirer.prompt({
         type: "list",
-        name: "task",
+        name: "option",
         message: "What would you like to do?",
         choices: [
             "View All Employees",
@@ -36,12 +36,12 @@ function init() {
             "View All Departments",
             "Add Department",
             "Quit"
-        ]
+        ],
     })
-    .then(function ({task}) {
-        console.log("You chose to: " + result.task);
+    .then(function(option) {
+        console.log("You chose to: " + result.option);
 
-        switch (result.task) {
+        switch (result.option) {
             case "View All Employees":
                 viewAllEmployees();
                 break;
