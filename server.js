@@ -78,3 +78,38 @@ function viewAllEmployees() {
         init();
     });
 }
+
+// Function to add employee
+function addEmployee() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employee's first name?",
+            name: "eeFirstName"
+        },
+        {
+            type: "input",
+            message: "What is the employee's last name?",
+            name: "eeLastName"
+        },
+        {
+            type: "input",
+            message: "What is the employee's role",
+            name: "roleID"
+        },
+        {
+            type: "input",
+            message: "What is the manager's ID number",
+            name: "managerID"
+        }
+    ])
+    .then(function(answer) {
+        connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", 
+        [answer.eeFirstName, answer.eeLastName, answer.roleID, answer.managerID], 
+        function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            init();
+        });
+    });
+}
