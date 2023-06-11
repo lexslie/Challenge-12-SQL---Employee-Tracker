@@ -20,6 +20,7 @@ connection.connect(function (err) {
     init();
 });
 
+// Function to initialize app
 function init() {
     inquirer.prompt({
         type: "list",
@@ -33,11 +34,13 @@ function init() {
             "Add Role",
             "View All Departments",
             "Add Department",
-            "End"
+            "Quit"
         ]
     })
     .then(function ({task}) {
-        switch (task) {
+        console.log("You chose to: " + result.task);
+
+        switch (result.task) {
             case "View All Employees":
                 viewAllEmployees();
                 break;
@@ -59,9 +62,19 @@ function init() {
             case "Add Department":
                 addDepartment();
                 break;
-            case "End":
-                end();
+            default:
+                quit();
                 break;
         }
+    });
+}
+
+// Function to view employees
+function viewAllEmployees() {
+    let query = "SELECT * FROM employee";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        init();
     });
 }
