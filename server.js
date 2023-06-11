@@ -204,3 +204,9 @@ function addDepartment() {
         });
     });
 }
+
+// Function to quit application
+function quit() {
+    connection.end();
+    process.exit();
+}
