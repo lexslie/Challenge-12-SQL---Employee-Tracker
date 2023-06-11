@@ -187,3 +187,20 @@ function viewAllDepartments() {
         init();
     });
 }
+
+// Function to add departments
+function addDepartment() {
+    inquirer.prompt({
+        type: "input",
+        message: "What department would you like to add?",
+        name: "departmentName"
+    })
+    .then(function(answer){
+        connection.query("INSERT INTO department (name) VALUES (?)", [answer.departmentName], 
+        function(err, res) {
+            if (err) throw err;
+            console.table(res)
+            init()
+        });
+    });
+}
